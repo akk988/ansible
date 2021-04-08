@@ -1,0 +1,114 @@
+# Download the VIRL images and create a topology in GNS3
+# The topology contains of: switch, router, Network Automation Appliance & NAT Cloud
+
+# Add a new template "Network Automation" to GNS3
+# After creating the topology, open CMD on NA-Appliance
+
+nano /etc/network/interfaces
+# uncomment the following lines
+auto eth0
+iface eth0 inet dhcp
+
+# check the ip of the Network Automation Appliance
+ifconfig
+inet 192.168.96.130
+
+===Router & Switch Config===
+R1:
+conf t
+hostname R1
+int fa0/0
+ no sh
+ ip add 192.168.96.51 255.255.255.0
+
+
+ R2:
+conf t
+hostname R2
+int fa0/0
+ no sh
+ ip add 192.168.96.52 255.255.255.0
+
+
+SW1:
+conf t
+hostname SW1
+int g0/0
+ no sw
+ no sh
+ ip add 192.168.96.61 255.255.255.0
+
+
+===ADD to all Routers and Switches===
+# To be able to run ssh commands from ansible
+
+For Remote Accessibility:
+usern cisco pas cisco
+usern cisco priv 15
+lin vty 0 4
+ tr i a
+ logi loc
+ exi
+ip domain-n netautomation.com  
+
+cry key gen rsa
+1024
+
+
+===NA Appliance Configuration===
+
+
+nano /etc/network/interfaces
+
+auto eth0
+iface eth0 inet dhcp
+
+
+
+============================
+
+nano ansible.cfg
+
+[defaults]
+inventory = ./myhosts
+host_key_checking = false
+timeout = 15 
+deprecation_warnings=False
+
+============================
+
+nano myhosts
+
+[routers]
+R2
+R3
+R4
+
+[switches]
+SW1
+SW2
+
+============================
+
+nano /etc/hosts
+
+192.168.96.51 R1
+192.168.96.52 R2
+
+NA Appliance Verification:===
+ifconfig
+cat ansible.cfg
+cat myhosts
+cat /etc/hosts
+ansible --list-hosts all
+ansible --list-hosts routers
+ansible --list-hosts switches
+
+ping R2
+ssh cisco@R2
+
+# user and password are cisco cisco
+
+
+===AD HOC Commands===
+ansible R2 -m raw -a "show version" -u cisco -k

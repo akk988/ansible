@@ -1,0 +1,10 @@
+AD HOC Commands:==============
+ansible R2 -m raw -a "show version" -u cisco -k
+ansible R3 -m raw -a "show ip ei nei" -u cisco -k
+ansible routers -i ./myhosts -m raw -a "sh ip ei nei" -u cisco -k
+ansible all -i ./myhosts -m raw -a "show version" -u cisco -k
+ansible all -i ./myhosts -m raw -a "show version" -u cisco -k | grep 'CHANGED\|flash0\|ROM: 3700 Software'
+ansible all -i ./myhosts -m raw -a "show run | i user" -u cisco -k | grep 'CHANGED\|username'
+ansible all -i ./myhosts -m raw -a "show run | i user" -u cisco -k | grep 'CHANGED\|username' (greaterthansign) username.txt
+ansible all -i ./myhosts -m raw -a "show arp" -u cisco -k
+ansible all -i ./myhosts -m raw -a "show arp" -u cisco -k | grep 'CHANGED\|4924'

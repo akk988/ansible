@@ -8,7 +8,8 @@ DYNAMIPS INFO PAGE
 
 After Setting up the lab in GNS3, you should have a basic knowlage about the Dynamips in GNS3
 
-GNS3 "really" recommend using the c3640, c3660, c3725, c3745 and c7200 IOS images listed in their website, because they have proven to be the most stable in GNS3 provided you use the right amount of RAM and Idle-PC value.
+GNS3 "really" recommend using the c3640, c3660, c3725, c3745 and c7200 IOS images listed in their website, because they have proven to be the most stable in GNS3 provided you.
+Use the right amount of RAM and Idle-PC value.
 
 https://docs.gns3.com/docs/emulators/cisco-ios-images-for-dynamips/
 
@@ -23,4 +24,7 @@ or try this: https://mega.nz/folder/nJR3BTjJ#N5wZsncqDkdKyFQLELU1wQ
 
 IMPORT c3725 DYNAMIPS IMAGE to GNS3
 
+---------------------
 
+Download the Net. Auto from GNS3
+https://www.gns3.com/marketplace/appliances/network-automation
