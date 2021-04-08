@@ -1,0 +1,62 @@
+# A GNS3 Network Lab without Automation
+
+# Create a topology of two PCs and coonect them to one switch
+# The compopnents are: PC1, PC2 and Switch1
+
+# PC1:
+ip 10.0.0.1 255.255.255.0
+# PC2
+ip 10.0.0.2 255.255.255.0
+ping 10.0.0.1
+
+# -------------------
+# In GNS3 Create a second lab of three c3725 routers, R1, R2 and R3
+R1:
+conf t
+hostname R1
+int f0/0
+ no shut
+ ip address 10.0.0.1 255.255.255.252
+int f0/1
+ no shut
+ ip address 10.0.0.5 255.255.255.252
+int l0
+ no shut
+ ip address 10.1.1.1 255.255.255.255
+ 
+router ei 1
+ net 10.0.0.0 
+
+R2:
+conf t
+hostname R2
+int f0/0
+ no shut
+ ip address 10.0.0.2 255.255.255.252
+in l0
+ no shut
+ ip address 10.2.2.2 255.255.255.255
+ 
+router ei 1
+ net 10.0.0.0 
+end
+
+R3:
+conf t
+hostname R3
+int f0/0
+ no shut
+ ip address 10.0.0.6 255.255.255.252
+in l0
+ no shut
+ ip address 10.3.3.3 255.255.255.255
+ 
+router ei 1
+ net 10.0.0.0 
+end
+
+Verify on each router:
+sh ip ei nei
+sh ip route
+
+
