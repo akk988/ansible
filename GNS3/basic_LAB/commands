@@ -1,0 +1,12 @@
+# Create a topology of two PCs and coonect them to one switch
+# The compopnents are: PC1, PC2 and Switch1
+
+# PC1:
+ip 10.0.0.1 255.255.255.0
+# PC2
+ip 10.0.0.2 255.255.255.0
+ping 10.0.0.1
+
+# -------------------
+
+
